@@ -8,3 +8,10 @@ Run frontend
 cd frontend
 npm i
 npm run dev
+
+
+Inside backend
+mkdir -p build                                                             
+clang++ profit_loss.cpp mains/profit_loss_main.cpp -std=c++17 -o build/profit_loss
+clang++ real_time_tracker.cpp mains/real_time_tracker_main.cpp -std=c++17 -lcurl -pthread -o build/real_time_tracker
+clang++ stock_news.cpp mains/stock_news_main.cpp -std=c++17 -lcurl -pthread -o build/stock_news
