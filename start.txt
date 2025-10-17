@@ -1,0 +1,10 @@
+Run backend
+cd backend
+npm i
+npm run dev
+
+
+Run frontend
+cd frontend
+npm i
+npm run dev
