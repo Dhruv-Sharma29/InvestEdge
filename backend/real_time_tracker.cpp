@@ -92,7 +92,7 @@ namespace RealTimeTracker {
 
     // ---------------------- MODULE ENTRY POINT ----------------------
     void run() {
-        string apiKey = "3fa84d09acb3402a98c614a63a1d80b7"; // 🔑 Replace with your Twelve Data API key
+        string apiKey = "your_api_key_here"; // 🔑 Replace with your Twelve Data API key
         string symbol;
 
         RealTimePriceTracker tracker(10);
