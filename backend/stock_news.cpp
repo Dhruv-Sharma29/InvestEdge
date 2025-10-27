@@ -23,7 +23,7 @@ namespace StockNews {
             return;
         }
 
-        string apiKey = "5692e41d92994500a229f62abd065bf5"; 
+        string apiKey = "your_api_key_here"; 
         string url = "https://newsapi.org/v2/everything?q=finance%20OR%20stocks%20OR%20business&sortBy=publishedAt&pageSize=15&language=en&apiKey=" + apiKey;
         string readBuffer;
 
