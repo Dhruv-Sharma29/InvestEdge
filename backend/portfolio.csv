@@ -1,0 +1,6 @@
+symbol,name,sector,price,prev_close,market_cap
+AAPL,Apple Inc,Technology,194.25,190.50,3200000
+TSLA,Tesla Inc,Automotive,248.50,255.00,800000
+GOOG,Google,Technology,140.12,138.90,1500000
+TCS,Tata Consultancy,IT,3420,3380,13000000
+INFY,Infosys,IT,1512,1500,8000000

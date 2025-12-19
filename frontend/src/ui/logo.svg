@@ -1,0 +1,11 @@
+<svg width="180" height="44" viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" x2="180" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00C853"/>
+      <stop offset="1" stop-color="#007BFF"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="180" height="44" rx="10" fill="url(#g)" opacity="0.1"/>
+  <path d="M12 30 L38 16 L52 22 L92 6 L102 10 L126 4" stroke="url(#g)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <text x="60" y="31" font-family="Poppins, Arial, sans-serif" font-size="18" font-weight="700" fill="#E5E7EB">InvestEdge</text>
+</svg>
