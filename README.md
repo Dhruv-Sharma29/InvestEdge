@@ -40,7 +40,7 @@ Open `http://localhost:5173`. Select a program, start it, and send each requeste
 
 The server binds to `127.0.0.1:5055`, accepts exactly the five program names above, and resolves their executables only from `backend/build`. Browser access defaults to `http://localhost:5173` and `http://127.0.0.1:5173`; set `ALLOWED_ORIGINS` to exact comma-separated origins for another local frontend port. It has no account authentication and should remain local. Program data files are shared within the backend directory.
 
-CI runs Socket.IO security tests, builds the C++ tools, and builds the frontend. Market API calls require credentials and are not part of CI.
+Verify locally with `npm test` in `backend/`, the CMake build commands above, and `npm run build` in `frontend/`. Market API calls require credentials and are not part of the automated tests.
 
 ## Screenshots
 
