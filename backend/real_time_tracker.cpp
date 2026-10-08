@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -7,7 +8,7 @@
 #include <thread>
 #include <chrono>
 #include <curl/curl.h>
-#include "json.hpp" // Download from: https://github.com/nlohmann/json
+#include <nlohmann/json.hpp> // Download from: https://github.com/nlohmann/json
 
 using json = nlohmann::json;
 using namespace std;
@@ -92,7 +93,12 @@ namespace RealTimeTracker {
 
     // ---------------------- MODULE ENTRY POINT ----------------------
     void run() {
-        string apiKey = "YOUR_API_KEY"; // 🔑 Replace with your Twelve Data API key
+        const char* configuredKey = std::getenv("TWELVE_DATA_API_KEY");
+        if (!configuredKey || !*configuredKey) {
+            cerr << "Set TWELVE_DATA_API_KEY before running this module.\n";
+            return;
+        }
+        string apiKey = configuredKey;
         string symbol;
 
         RealTimePriceTracker tracker(10);

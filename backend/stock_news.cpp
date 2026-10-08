@@ -1,7 +1,8 @@
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <curl/curl.h>
-#include "json.hpp"  // Include nlohmann/json header
+#include <nlohmann/json.hpp>  // Include nlohmann/json header
 
 using json = nlohmann::json;
 using namespace std;
@@ -23,7 +24,19 @@ namespace StockNews {
             return;
         }
 
-        string apiKey = "YOUR_API_KEY"; 
+        const char* configuredKey = std::getenv("NEWS_API_KEY");
+
+        if (!configuredKey || !*configuredKey) {
+
+            cerr << "Set NEWS_API_KEY before running this module.\n";
+
+            curl_easy_cleanup(curl);
+
+            return;
+
+        }
+
+        string apiKey = configuredKey;
         string url = "https://newsapi.org/v2/everything?q=finance%20OR%20stocks%20OR%20business&sortBy=publishedAt&pageSize=15&language=en&apiKey=" + apiKey;
         string readBuffer;
 

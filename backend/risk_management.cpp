@@ -1,3 +1,4 @@
+#include <cstdlib>
 // g++ real_time_tracker_with_risk.cpp -o build/real_time_tracker_with_risk -std=c++17 -lcurl -pthread
 #include <iostream>
 #include <iomanip>
@@ -8,7 +9,7 @@
 #include <thread>
 #include <chrono>
 #include <curl/curl.h>
-#include "json.hpp"   // https://github.com/nlohmann/json
+#include <nlohmann/json.hpp>   // https://github.com/nlohmann/json
 
 using json = nlohmann::json;
 using namespace std;
@@ -89,7 +90,12 @@ double getStockPrice(const string& symbol, const string& apiKey) {
 
 /* ---------------------- ENTRY POINT ---------------------- */
 void run() {
-    string apiKey = "YOUR_API_KEY";   // your Twelve Data API key
+    const char* configuredKey = std::getenv("TWELVE_DATA_API_KEY");
+    if (!configuredKey || !*configuredKey) {
+        cerr << "Set TWELVE_DATA_API_KEY before running this module.\n";
+        return;
+    }
+    string apiKey = configuredKey;
     string symbol;
     double stopLoss = 0.0, target = 0.0;
 

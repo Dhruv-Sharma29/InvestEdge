@@ -68,8 +68,8 @@ export default function InvestEdge() {
               Gain the <em>Edge</em> in Your Investments
             </h1>
             <p className="sub">
-              Track performance, stream live prices, analyze portfolios, and scan market news — all from one unified
-              dashboard. InvestEdge brings analytics, AI, and automation together for smarter trading.
+              Run five C++ tools for profit and loss, price tracking, portfolio calculations, risk estimates, and market news.
+              This academic prototype streams their terminal output; market-data tools need provider credentials.
             </p>
 
             {/* --- Buttons and Module Selector --- */}

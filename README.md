@@ -1,167 +1,54 @@
-# InvestEdge 📈
+# InvestEdge
 
-**InvestEdge** is a full-stack investment analytics platform that integrates
-high-performance **C++ financial computation engines** with a **Node.js backend**
-and a **React (Vite) frontend** to deliver portfolio analysis, risk evaluation,
-profit & loss tracking, and real-time market insights through a modern web dashboard.
+An academic prototype with five interactive C++ command-line tools, a local Node.js/Socket.IO server, and a React interface that streams terminal output.
 
----
+| Program | Current behavior |
+| --- | --- |
+| `profit_loss` | Records buys and sells, supports undo/redo, saves CSV history, and compares total buy/sell cash flows. This is not a realized/unrealized cost-basis calculation. |
+| `portfolio_analyzer` | Reads sample stock data from CSV, ranks movers and market capitalization, and displays stock/sector information. |
+| `real_time_tracker` | Polls Twelve Data for prices using a supplied API key. |
+| `risk_management` | Monitors prices against user-entered stop-loss and target thresholds. |
+| `stock_news` | Fetches NewsAPI articles using a supplied API key. |
 
-## 🚀 Key Features
+The current UI displays text output. Accounts, charts, AI models, and production deployment are not implemented. This prototype is for coursework and experimentation.
 
-- 📊 **Portfolio Analysis**
-  - Asset allocation
-  - Portfolio-level metrics
-  - CSV-based portfolio ingestion
+## Run locally
 
-- 💰 **Profit & Loss Engine (C++)**
-  - Realized and unrealized P&L computation
-  - High-performance numerical processing
+Requires Node.js 22.12+, a C++17 compiler, CMake 3.20+, and libcurl development headers. CMake downloads the pinned nlohmann/json dependency. On Ubuntu, install `libcurl4-openssl-dev`.
 
-- ⚠️ **Risk Management**
-  - Volatility estimation
-  - Exposure analysis
-  - Risk indicators for decision support
-
-- ⏱️ **Real-Time Tracking**
-  - Live stock data processing
-  - Continuous market updates
-
-- 📰 **Stock News Aggregation**
-  - Market-relevant news extraction
-  - Stock-specific information feeds
-
-- 🌐 **Interactive Web Dashboard**
-  - Clean and responsive UI
-
----
-
-## 🛠️ Technology Stack
-
-### Backend
-- **C++** – Core financial analytics engines
-- **Node.js** – API layer and orchestration
-- **JSON** – Inter-process communication
-- **CSV** – Portfolio data handling
-
-### Frontend
-- **React.js**
-- **Vite**
-- **CSS** – Custom UI styling
-
----
-
-## 📁 Project Structure
-
-```text
-InvestEdge/
-├── backend/
-│   ├── profit_loss.cpp              # Profit & Loss computation module
-│   ├── real_time_tracker.cpp        # Real-time stock tracking logic
-│   ├── portfolio_analyzer.cpp       # Portfolio analytics engine
-│   ├── risk_management.cpp          # Risk metrics and analysis
-│   ├── stock_news.cpp               # Stock news processing
-│   ├── server.js                    # Node.js backend server
-│   ├── package.json
-│   ├── README.md
-│   ├── portfolio.csv                # Sample portfolio data
-│   └── mains/
-│       ├── profit_loss_main.cpp
-│       ├── real_time_tracker_main.cpp
-│       ├── portfolio_analyzer_main.cpp
-│       ├── risk_management_main.cpp
-│       └── stock_news_main.cpp
-│
-├── frontend/
-│   ├── index.html
-│   ├── vite.config.js
-│   ├── package.json
-│   ├── README.md
-│   └── src/
-│       ├── App.jsx
-│       ├── main-investedge.jsx
-│       └── ui/
-│           ├── investedge.css
-│           └── logo.svg
-│
-├── screenshots/
-│   ├── dashboard.png
-│   ├── portfolio_analysis.png
-│   ├── stock_news.png
-│   └── real_time_tracking.png
-│
-├── LICENSE
-└── README.md
+```sh
+cd backend
+npm ci
+cmake -S . -B build
+cmake --build build
+npm test
+# Only needed for the news/price programs:
+export NEWS_API_KEY="your-newsapi-key"
+export TWELVE_DATA_API_KEY="your-twelve-data-key"
+npm run dev
 ```
 
----
+In a second terminal:
 
-## ⚙️ Installation & Setup
+```sh
+cd frontend
+npm ci
+npm run dev
+```
 
-### Prerequisites
-- Node.js (v16+ recommended)
-- C++ compiler (GCC / Clang)
-- npm
+Open `http://localhost:5173`. Select a program, start it, and send each requested input through the text box. Stop a running program before choosing another.
 
----
+The server binds to `127.0.0.1:5055`, accepts exactly the five program names above, and resolves their executables only from `backend/build`. Browser access defaults to `http://localhost:5173` and `http://127.0.0.1:5173`; set `ALLOWED_ORIGINS` to exact comma-separated origins for another local frontend port. It has no account authentication and should remain local. Program data files are shared within the backend directory.
 
-### 🔧 Backend Setup
-- cd backend
-- npm install
-- npm run dev
+CI runs Socket.IO security tests, builds the C++ tools, and builds the frontend. Market API calls require credentials and are not part of CI.
 
+## Screenshots
 
-### 🔧 Frontend Setup
-- cd frontend
-- npm install
-- npm run dev
-- example: http://localhost:5173
+![Interface](screenshots/dashboard.png)
+![Portfolio output](screenshots/portfolio_analysis.png)
+![News output](screenshots/stock_news.png)
+![Price output](screenshots/real_time_tracking.png)
 
+## License
 
-### 📊 Sample Data
-- Sample portfolio data is provided in:
-- backend/portfolio.csv
-- You can replace this file with your own portfolio dataset to analyze different assets.
-
-### 🎯 Use Cases
-- Portfolio performance analysis
-- Risk-aware investment decision making
-- Full-stack fintech system design demonstration
-
-### 🔮 Future Enhancements
-- Database integration (PostgreSQL / MongoDB)
-- Authentication and user accounts
-- WebSocket-based live price streaming
-- Advanced risk models (VaR, CVaR)
-- Dockerized deployment
-- Cloud hosting
-
-### 📄 License
-This project is licensed under the MIT License.
-
-### 👤 Author
-**Dhruv Sharma**  
-AI & Data Science Enthusiast | Aspiring Engineer
-
-## 📸 Project Screenshots
-
-### Dashboard Overview
-<p align="center">
-  <img src="screenshots/dashboard.png" width="850"/>
-</p>
-
-### Portfolio Analysis
-<p align="center">
-  <img src="screenshots/portfolio_analysis.png" width="850"/>
-</p>
-
-### Stock News
-<p align="center">
-  <img src="screenshots/stock_news.png" width="850"/>
-</p>
-
-### Real-Time Stock Tracking
-<p align="center">
-  <img src="screenshots/real_time_tracking.png" width="850"/>
-</p>
-
+MIT. Author: Dhruv Sharma.
